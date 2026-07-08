@@ -1,0 +1,9 @@
+# pip install -r requirements.txt
+
+anthropic
+psycopg2-binary
+faker
+python-dotenv
+tabulate
+streamlit
+pandas
