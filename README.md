@@ -1,6 +1,6 @@
 # sql-query-agent
 
-The purpose of this project is to allow non-technical users to execute queries in plain english. You can type a question -- "show me all customers in Texas with a savings account" -- and the agent figures out the query, runs it against your database, and returns the results. No SQL knowledge required.
+The purpose of this project is to allow non-technical users to execute queries in plain english. You can type a question (e.g., "show me all customers in Texas with a savings account") and the agent figures out the query, runs it against your database, and returns the results.
 
 I built this to demonstrate how large language models can be used as practical interfaces for relational databases.
 
@@ -20,14 +20,14 @@ I built this to demonstrate how large language models can be used as practical i
 ## What you need before starting
 
 - **Python 3.10+** -- [download](https://www.python.org/downloads/)
-- **Docker Desktop** -- [download](https://www.docker.com/products/docker-desktop/). Local sample database
-- **Anthropic API key** -- [get one](https://console.anthropic.com/). Query agent
+- **Docker Desktop** -- [download](https://www.docker.com/products/docker-desktop/) (for local sample database)
+- **Anthropic API key** -- [get one](https://console.anthropic.com/) (query agent)
 
 ---
 
 ## Setup
 
-### Step 1 -- Clone The Repo + Setup Environment
+### Step 1 - Clone The Repo + Setup Environment
 
 ```bash
 git clone https://github.com/i-sahraoui/sql-query-agent.git
@@ -45,7 +45,7 @@ Then install dependencies:
 pip install -r requirements.txt
 ```
 
-### Step 2 -- Add Credentials
+### Step 2 - Add Credentials
 
 Copy `.env.example` to a new file called `.env` and fill in your values:
 
@@ -58,7 +58,7 @@ DB_PASSWORD=your_postgres_password
 ANTHROPIC_API_KEY=your_key_here
 ```
 
-### Step 3 -- Connect a Database
+### Step 3 - Connect a Database
 
 **Option A: Sample banking database**
 
@@ -86,9 +86,9 @@ DB_PASSWORD=admin123
 
 If you already have a PostgreSQL database running, just point your `.env` file at it. The agent reads your schema and data automatically and requires no changes.
 
-Make sure your database is accessible at the host and port you specify. The user must have read access for the agent to work.
+Make sure your database is accessible at the host and port you specify. You must have read access for the agent to work.
 
-### Step 4 -- Run The App
+### Step 4 - Run The App
 
 ```bash
 streamlit run app.py
@@ -125,7 +125,6 @@ sql-query-agent/
 ├── seed_data.py        # generates fake banking data (sample DB only)
 ├── schema.sql          # creates the sample database tables
 ├── requirements.txt    # python dependencies
-├── .env                # credentials to modify
 ├── .env.example        # credentials example
 ├── .gitignore          
 └── .streamlit/
