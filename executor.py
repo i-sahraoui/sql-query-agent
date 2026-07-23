@@ -8,7 +8,7 @@ load_dotenv()
 
 # controls what query types are allowed
 # add "INSERT", "UPDATE", "DELETE" here when write access is needed (uncomment lines 119-122)
-ALLOWED_QUERY_TYPES = ["SELECT"]
+ALLOWED_QUERY_TYPES = ["SELECT", "WITH", "EXPLAIN"]
 
 def parse_response(agent_response):
     sql = ""
@@ -74,23 +74,23 @@ def run_and_return(agent_response):
     sql, explanation, parse_error = parse_response(agent_response)
 
     if parse_error:
-        return None, None, None, parse_error
+        return None, None, None, parse_error, "error"
 
     if not sql:
-        return None, None, None, "Couldn't parse a query from the agent response."
+        return None, None, None, "Couldn't parse a query from the agent response.", "error"
 
     allowed, reason = validate_query(sql)
     if not allowed:
-        return None, None, None, f"Query blocked: {reason}"
+        return None, None, None, f"Query blocked: {reason}", "error"
 
     rows, col_names, db_error = run_query(sql)
 
     if db_error:
-        return None, None, None, db_error
+        return None, None, None, db_error, "error"
 
     df = pd.DataFrame(rows, columns=col_names)
 
-    # fix 3: distinguish between empty results and an actual error
+    # distinguish between empty results and an actual error
     status = "empty" if df.empty else "ok"
 
     return sql, explanation, df, None, status
